@@ -1,0 +1,58 @@
+<!-- header -->
+
+<?php include "./includes/admin-header.php" ?>
+
+<div id="wrapper">
+
+<?php 
+
+?>
+<!-- Navigation -->
+    
+<?php include "./includes/admin-navigation.php" ?>
+    
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        
+<?php include "./includes/admin-sidebar.php" ?>
+
+<div id="page-wrapper">
+
+<div class="container-fluid">
+
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h2>
+                HI ADMIN
+            </h2>
+            <?php 
+                if ( isset( $_GET['source'])) {
+                    $source = escape($_GET['source']);
+                } else {
+                    $source = "";
+                }
+                
+                switch ($source) {
+                    case 'add_post':
+                        include "./includes/add_post.php";
+                        break;
+                    case 'edit_post':
+                        include "./includes/edit_post.php";
+                        break;
+                    default:
+                        include "./includes/view_all_posts.php";
+                        break;
+                }
+                
+            ?>  
+        </div>
+    </div>
+</div>
+    <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+
+            <!-- Footer -->
+
+            <?php include "./includes/admin-footer.php" ?>

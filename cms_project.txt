@@ -1,0 +1,92 @@
+CREATE DATABASE cms_project
+
+CREATE TABLE categories (
+	id INT NOT NULL AUTO_INCREMENT,
+	title VARCHAR (255) NOT NULL,
+	PRIMARY KEY (`id`)
+    )
+
+INSERT INTO categories (`title `) VALUES
+('politics'),
+('actuality'),
+('sport'),
+('travel'),
+('food')
+
+INSERT INTO categories (`title`) VALUES
+('music'),
+('lifestyle'),
+('personal growth'),
+('busines')
+
+CREATE TABLE posts (
+	id INT NOT NULL AUTO_INCREMENT,
+	post_id_category INT NOT NULL,
+	title VARCHAR (255) NOT NULL,
+	author VARCHAR (255) NOT NULL,
+	date DATE not null default current_timestamp,
+	image VARCHAR(255),
+	content TEXT NOT NULL,
+	post_tags VARCHAR(255),
+	post_status CHAR(255) DEFAULT 'draft',
+	post_comment_count INT,
+	PRIMARY KEY (`id`)
+    )
+
+
+INSERT INTO posts (`title`, `author`, `content`, `post_tags`) VALUES
+('A Travel into the Beauties of Puglia','Burrata Man', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean venenatis urna eget neque vehicula, sit amet accumsan metus tincidunt. Aenean ut nulla rutrum nunc vestibulum scelerisque eget eu augue. Integer eget orci ut nulla viverra gravida nec eget ante. Sed accumsan nec metus id varius. Curabitur pharetra tortor lectus, sed luctus lorem consequat ut. Cras aliquam vulputate suscipit. Suspendisse interdum gravida risus, id interdum ex tristique non. Sed eu eros ac odio vestibulum sodales vel quis dolor. Sed blandit ligula in mauris sagittis vehicula. Vestibulum sagittis semper libero. Etiam convallis orci a enim pretium gravida. Fusce imperdiet ac est tincidunt.', 'food, italy, burrata')
+
+
+CREATE TABLE comments (
+	id INT NOT NULL AUTO_INCREMENT,
+	comment_id_post INT NOT NULL,
+	comment_author VARCHAR (255) NOT NULL,
+	comment_content TEXT NOT NULL,
+	comment_status CHAR(255) DEFAULT 'draft',
+	comment_date DATE not null default current_timestamp,
+	PRIMARY KEY (`id`)
+    )
+
+INSERT INTO `comments`(`comment_id_post`, `comment_author`, `comment_content`)
+	VALUES ('1','Mozzarella Boy','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean venenatis urna eget neque vehicula, sit amet accumsan metus tincidunt. Aenean ut nulla rutrum nunc vestibulum scelerisque eget eu augue. Integer eget orci ut nulla viverra gravida nec eget ante. Sed accumsan nec metus id varius. Curabitur pharetra tortor lectus, sed luctus lorem consequat ut. Cras aliquam vulputate suscipit. Suspendisse interdum gravida risus, id interdum ex tristique non. Sed eu eros ac odio vestibulum sodales vel quis dolor')
+
+ALTER TABLE comments
+	ADD author_email VARCHAR(255) NOT NULL after comment_author
+
+
+CREATE TABLE users (
+	id INT NOT NULL AUTO_INCREMENT,
+	first_name VARCHAR (255) NOT NULL,
+	last_name VARCHAR (255) NOT NULL,
+	birth_date DATE NOT NULL,
+	username VARCHAR (255) NOT NULL,
+	email VARCHAR (255) NOT NULL,
+	user_pic TEXT NULL,
+	password VARCHAR (255) NOT NULL,
+	role VARCHAR (255) NULL DEFAULT subscriber,
+	registered_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	randSalt VARCHAR (255) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE (`username`),
+	UNIQUE (`email`)
+    )
+
+INSERT INTO `users`(`first_name`, `last_name`, `birth_date`, `username`, `email`, `user_pic`, `password`) 
+VALUES ('new','user','1990-03-01','the tester','new@user.it', 'test.jpg', 'newuser')
+
+
+CREATE TABLE users_online (
+	id INT NOT NULL AUTO_INCREMENT,
+	session VARCHAR (255),
+	time INT (11),
+	PRIMARY KEY (`id`)
+)
+
+    )
+
+
+join posts and categories
+
+SELECT posts.post_id, posts.title, posts.author, posts.post_id_category, posts.post_status, posts.image, posts.post_tags, posts.date, 
+posts.post_view_count, categories.id, categories.title FROM posts LEFT JOIN categories ON posts.post_id_category = categories.id
