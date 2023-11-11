@@ -42,4 +42,4 @@ Follow these steps to set up and explore the CMS Blog Project:
     Clone the CMS Blog Project repository to your local machine
 
     Open the Browser to localhost:
-    Launch your preferred browser and go to http://localhost/cms-blog-project/ to access the project.
+    Launch your preferred browser and go to http://localhost/php-blog-project/ to access the project.
